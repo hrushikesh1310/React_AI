@@ -1,5 +1,20 @@
 # React + TypeScript + Vite
 
+## Deploy to GitHub Pages
+
+This repo is configured to deploy via **GitHub Actions** to GitHub Pages.
+
+- Live URL: https://hrushikesh1310.github.io/React_AI/
+- Workflow: `.github/workflows/deploy.yml`
+
+### One-time GitHub setting
+In your GitHub repo:
+`Settings → Pages → Source: GitHub Actions`
+
+### Notes
+Because this is a GitHub Pages **project site**, Vite is configured with:
+`base: '/React_AI/'` in `vite.config.ts`.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
