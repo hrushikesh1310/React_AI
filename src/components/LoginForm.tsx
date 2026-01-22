@@ -1,7 +1,6 @@
 import type { FormEvent } from 'react'
 import { useMemo, useState } from 'react'
 import type { LoginResult } from '../auth/useAuth'
-import { DEMO_EMAIL, DEMO_PASSWORD } from '../auth/useAuth'
 
 type Props = {
   onLogin: (email: string, password: string) => Promise<LoginResult>
@@ -55,7 +54,7 @@ export default function LoginForm({ onLogin }: Props) {
               className="input"
               autoComplete="email"
               inputMode="email"
-              placeholder="admin@example.com"
+              placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -67,7 +66,7 @@ export default function LoginForm({ onLogin }: Props) {
               className="input"
               type="password"
               autoComplete="current-password"
-              placeholder="admin123"
+              placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -78,16 +77,6 @@ export default function LoginForm({ onLogin }: Props) {
           <button className="button" type="submit" disabled={!canSubmit}>
             {isSubmitting ? 'Signing in…' : 'Sign in'}
           </button>
-
-          <div className="hint">
-            <div className="hintTitle">Demo credentials</div>
-            <div className="hintRow">
-              <span className="hintKey">Email:</span> <code>{DEMO_EMAIL}</code>
-            </div>
-            <div className="hintRow">
-              <span className="hintKey">Password:</span> <code>{DEMO_PASSWORD}</code>
-            </div>
-          </div>
         </form>
       </div>
     </div>
