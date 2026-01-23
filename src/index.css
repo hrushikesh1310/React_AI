@@ -191,17 +191,26 @@ code {
 
 /* Dashboard landing page */
 .dashboardPage {
+  --dashboard-bg-image: url('/nyc-night.svg');
+
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
+
+  /* NYC night city-lights background */
   background:
-    radial-gradient(1200px 700px at 18% 10%, rgba(56, 189, 248, 0.26) 0%, rgba(56, 189, 248, 0)
-      55%),
-    radial-gradient(900px 560px at 86% 16%, rgba(99, 102, 241, 0.25) 0%, rgba(99, 102, 241, 0)
-      58%),
-    radial-gradient(900px 560px at 50% 92%, rgba(251, 191, 36, 0.06) 0%, rgba(251, 191, 36, 0)
-      60%),
-    linear-gradient(180deg, #020617 0%, #0b1220 45%, #0f172a 100%);
+    /* dark overlay to keep text/table readable */
+    linear-gradient(
+      180deg,
+      rgba(2, 6, 23, 0.55) 0%,
+      rgba(2, 6, 23, 0.68) 45%,
+      rgba(2, 6, 23, 0.82) 100%
+    ),
+    var(--dashboard-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .dashboardPage::before {
@@ -228,45 +237,10 @@ code {
 }
 
 .dashboardPage::after {
-  /* Stylized NYC-at-night skyline + glow (no external image) */
-  content: '';
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 46vh;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.95;
-  background:
-    /* haze / city glow */
-    radial-gradient(900px 260px at 50% 100%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0)
-      70%),
-    radial-gradient(700px 260px at 30% 100%, rgba(250, 204, 21, 0.12) 0%, rgba(250, 204, 21, 0)
-      70%),
-    radial-gradient(700px 260px at 70% 100%, rgba(34, 211, 238, 0.11) 0%, rgba(34, 211, 238, 0)
-      70%),
-    /* buildings */
-    linear-gradient(
-      180deg,
-      rgba(15, 23, 42, 0) 0%,
-      rgba(15, 23, 42, 0.08) 40%,
-      rgba(2, 6, 23, 0.92) 41%,
-      rgba(2, 6, 23, 0.92) 100%
-    ),
-    /* skyline silhouette */
-    repeating-linear-gradient(
-      90deg,
-      rgba(2, 6, 23, 0) 0px,
-      rgba(2, 6, 23, 0) 10px,
-      rgba(2, 6, 23, 0.95) 10px,
-      rgba(2, 6, 23, 0.95) 24px,
-      rgba(2, 6, 23, 0) 24px,
-      rgba(2, 6, 23, 0) 36px
-    );
-  mask-image:
-    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 20%, rgba(0, 0, 0, 1) 48%);
+  /* retired: the background now supplies the skyline */
+  content: none;
 }
+
 
 .topbar {
   position: sticky;

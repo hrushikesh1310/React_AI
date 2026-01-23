@@ -1,5 +1,5 @@
 import type { AuthUser } from '../auth/useAuth'
-import type { ReactNode } from 'react'
+import type { ReactNode, CSSProperties } from 'react'
 import { useEffect, useId, useMemo, useRef, useState } from 'react'
 
 type Props = {
@@ -168,6 +168,11 @@ function SettingsPanel({ open, onClose }: SettingsPanelProps) {
 }
 
 export default function Dashboard({ user, onLogout }: Props) {
+  const dashboardBgUrl = `${import.meta.env.BASE_URL}nyc-night.svg`
+  const dashboardStyle = {
+    ['--dashboard-bg-image' as any]: `url('${dashboardBgUrl}')`,
+  } as CSSProperties
+
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
   const [profileModalOpen, setProfileModalOpen] = useState(false)
@@ -241,7 +246,7 @@ export default function Dashboard({ user, onLogout }: Props) {
   }
 
   return (
-    <div className="dashboardPage">
+    <div className="dashboardPage" style={dashboardStyle}>
       <header className="topbar">
         <div className="topbarLeft">
           <h1 className="topbarTitle">Welcome, {username}!</h1>
@@ -328,9 +333,6 @@ export default function Dashboard({ user, onLogout }: Props) {
               <h2 className="billingTitle">Billing Overview</h2>
               <p className="billingSubtitle">Usage and spend for {user.email}</p>
             </div>
-            <button className="button secondary" type="button" onClick={() => setProfileModalOpen(true)}>
-              View Profile
-            </button>
           </header>
 
           <div className="tableScroll" role="region" aria-label="Billing table" tabIndex={0}>
