@@ -195,13 +195,13 @@ code {
   display: grid;
   grid-template-rows: auto 1fr;
   background:
-    radial-gradient(1000px 600px at 18% 12%, rgba(224, 231, 255, 0.9) 0%, rgba(224, 231, 255, 0)
+    radial-gradient(1200px 700px at 18% 10%, rgba(56, 189, 248, 0.26) 0%, rgba(56, 189, 248, 0)
+      55%),
+    radial-gradient(900px 560px at 86% 16%, rgba(99, 102, 241, 0.25) 0%, rgba(99, 102, 241, 0)
+      58%),
+    radial-gradient(900px 560px at 50% 92%, rgba(251, 191, 36, 0.06) 0%, rgba(251, 191, 36, 0)
       60%),
-    radial-gradient(900px 560px at 86% 24%, rgba(207, 250, 254, 0.85) 0%, rgba(207, 250, 254, 0)
-      55%),
-    radial-gradient(760px 520px at 60% 92%, rgba(240, 253, 250, 0.95) 0%, rgba(240, 253, 250, 0)
-      55%),
-    linear-gradient(180deg, #f8fafc 0%, #f6f7fb 60%, #f3f4f6 100%);
+    linear-gradient(180deg, #020617 0%, #0b1220 45%, #0f172a 100%);
 }
 
 .dashboardPage::before {
@@ -209,19 +209,63 @@ code {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.18;
+  opacity: 0.22;
   background:
-    linear-gradient(115deg, rgba(99, 102, 241, 0.22) 0%, rgba(34, 211, 238, 0.12) 50%, rgba(99, 102, 241, 0.18)
-      100%),
+    radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(1px 1px at 30% 40%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(1px 1px at 70% 25%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(1px 1px at 86% 44%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(1px 1px at 55% 12%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 60%),
     repeating-linear-gradient(
-      45deg,
-      rgba(15, 23, 42, 0.04) 0px,
-      rgba(15, 23, 42, 0.04) 1px,
-      rgba(15, 23, 42, 0) 1px,
-      rgba(15, 23, 42, 0) 12px
+      0deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 1px,
+      rgba(255, 255, 255, 0) 1px,
+      rgba(255, 255, 255, 0) 6px
     );
-  mix-blend-mode: multiply;
+  mix-blend-mode: screen;
   z-index: 0;
+}
+
+.dashboardPage::after {
+  /* Stylized NYC-at-night skyline + glow (no external image) */
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 46vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.95;
+  background:
+    /* haze / city glow */
+    radial-gradient(900px 260px at 50% 100%, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0)
+      70%),
+    radial-gradient(700px 260px at 30% 100%, rgba(250, 204, 21, 0.12) 0%, rgba(250, 204, 21, 0)
+      70%),
+    radial-gradient(700px 260px at 70% 100%, rgba(34, 211, 238, 0.11) 0%, rgba(34, 211, 238, 0)
+      70%),
+    /* buildings */
+    linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0) 0%,
+      rgba(15, 23, 42, 0.08) 40%,
+      rgba(2, 6, 23, 0.92) 41%,
+      rgba(2, 6, 23, 0.92) 100%
+    ),
+    /* skyline silhouette */
+    repeating-linear-gradient(
+      90deg,
+      rgba(2, 6, 23, 0) 0px,
+      rgba(2, 6, 23, 0) 10px,
+      rgba(2, 6, 23, 0.95) 10px,
+      rgba(2, 6, 23, 0.95) 24px,
+      rgba(2, 6, 23, 0) 24px,
+      rgba(2, 6, 23, 0) 36px
+    );
+  mask-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 20%, rgba(0, 0, 0, 1) 48%);
 }
 
 .topbar {
@@ -233,15 +277,16 @@ code {
   justify-content: space-between;
   gap: 12px;
   padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(2, 6, 23, 0.45);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22);
 }
 
 .topbarTitle {
   margin: 0;
   font-size: 18px;
   letter-spacing: -0.02em;
+  color: #f8fafc;
 }
 
 .topbarRight {
@@ -254,16 +299,17 @@ code {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(255, 255, 255, 0.14);
   cursor: pointer;
   display: grid;
   place-items: center;
   font-size: 16px;
+  color: #f8fafc;
 }
 
 .iconButton:hover {
-  background: #f8fafc;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .profileMenu {
@@ -285,9 +331,9 @@ code {
   place-items: center;
   font-weight: 800;
   font-size: 13px;
-  color: #0f172a;
-  background: linear-gradient(135deg, #e0e7ff 0%, #cffafe 100%);
-  border: 1px solid #e5e7eb;
+  color: #0b1220;
+  background: linear-gradient(135deg, #e0e7ff 0%, #cffafe 55%, #fde68a 110%);
+  border: 1px solid rgba(148, 163, 184, 0.5);
 }
 
 .menu {
@@ -334,45 +380,88 @@ code {
   z-index: 1;
 }
 
-.welcomeCard {
+/* Billing table */
+.billingPanel {
   width: 100%;
-  max-width: 720px;
-  background: rgba(255, 255, 255, 0.86);
+  max-width: 980px;
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(10px);
   border: 1px solid #e5e7eb;
   border-radius: 16px;
-  padding: 18px;
+  padding: 16px;
   box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
 }
 
-.welcomeTitle {
-  font-size: 13px;
-  color: #64748b;
-}
-
-.welcomeEmail {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  margin-top: 2px;
-}
-
-.welcomeMeta {
-  color: #475569;
-  margin-top: 6px;
-  font-size: 13px;
-}
-
-.welcomeActions {
-  display: grid;
-  grid-template-columns: 1fr;
+.billingHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 12px;
-  margin-top: 14px;
+  padding: 2px 2px 12px;
+}
+
+.billingTitle {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.billingSubtitle {
+  margin: 6px 0 0;
+  color: #475569;
+  font-size: 13px;
+}
+
+.tableScroll {
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  font-size: 14px;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+.table th {
+  background: rgba(248, 250, 252, 0.9);
+  color: #334155;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+}
+
+.table tr:hover td {
+  background: rgba(248, 250, 252, 0.85);
+}
+
+.tableStrong {
+  font-weight: 800;
+}
+
+.billingNote {
+  margin: 12px 2px 2px;
+  color: #64748b;
+  font-size: 12px;
 }
 
 @media (max-width: 520px) {
-  .welcomeActions {
-    grid-template-columns: 1fr;
+  .billingHeader {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
 

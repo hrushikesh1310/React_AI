@@ -15,6 +15,30 @@ function formatLoggedInAt(iso: string) {
   }
 }
 
+type BillingRow = {
+  provider: 'Anthropic' | 'Gemini' | 'OpenText'
+  currentMonthRequests: number
+  currentMonthCostUsd: number
+  totalCostUsd: number
+  lastUsedIso: string
+}
+
+function formatCurrencyUsd(value: number) {
+  return new Intl.NumberFormat(undefined, {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 2,
+  }).format(value)
+}
+
+function formatDate(iso: string) {
+  try {
+    return new Date(iso).toLocaleString()
+  } catch {
+    return iso
+  }
+}
+
 type ModalProps = {
   title: string
   onClose: () => void
@@ -161,6 +185,34 @@ export default function Dashboard({ user, onLogout }: Props) {
     return raw || 'User'
   }, [user.email])
 
+  const billingRows = useMemo<BillingRow[]>(() => {
+    // Mock/demo numbers for UI.
+    const now = Date.now()
+    return [
+      {
+        provider: 'Anthropic',
+        currentMonthRequests: 1842,
+        currentMonthCostUsd: 27.13,
+        totalCostUsd: 214.92,
+        lastUsedIso: new Date(now - 35 * 60 * 1000).toISOString(),
+      },
+      {
+        provider: 'Gemini',
+        currentMonthRequests: 963,
+        currentMonthCostUsd: 11.47,
+        totalCostUsd: 98.31,
+        lastUsedIso: new Date(now - 4 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        provider: 'OpenText',
+        currentMonthRequests: 221,
+        currentMonthCostUsd: 6.02,
+        totalCostUsd: 41.8,
+        lastUsedIso: new Date(now - 2 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+    ]
+  }, [])
+
   useEffect(() => {
     function onPointerDown(e: MouseEvent) {
       if (!profileMenuOpen) return
@@ -270,17 +322,46 @@ export default function Dashboard({ user, onLogout }: Props) {
       </header>
 
       <main className="dashboardMain">
-        <div className="welcomeCard">
-          <div className="welcomeTitle">Signed in as</div>
-          <div className="welcomeEmail">{user.email}</div>
-          <div className="welcomeMeta">Logged in at {formatLoggedInAt(user.loggedInAt)}</div>
-
-          <div className="welcomeActions">
+        <section className="billingPanel" aria-label="Billing overview">
+          <header className="billingHeader">
+            <div>
+              <h2 className="billingTitle">Billing Overview</h2>
+              <p className="billingSubtitle">Usage and spend for {user.email}</p>
+            </div>
             <button className="button secondary" type="button" onClick={() => setProfileModalOpen(true)}>
               View Profile
             </button>
+          </header>
+
+          <div className="tableScroll" role="region" aria-label="Billing table" tabIndex={0}>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Provider</th>
+                  <th scope="col">Current Month Requests</th>
+                  <th scope="col">Current Month Cost (USD)</th>
+                  <th scope="col">Total Cost (USD)</th>
+                  <th scope="col">Last Used</th>
+                </tr>
+              </thead>
+              <tbody>
+                {billingRows.map((row) => (
+                  <tr key={row.provider}>
+                    <td className="tableStrong">{row.provider}</td>
+                    <td>{row.currentMonthRequests.toLocaleString()}</td>
+                    <td>{formatCurrencyUsd(row.currentMonthCostUsd)}</td>
+                    <td>{formatCurrencyUsd(row.totalCostUsd)}</td>
+                    <td>{formatDate(row.lastUsedIso)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        </div>
+
+          <p className="billingNote">
+            These numbers are mock/demo values. Billing aggregation can be wired to your backend later.
+          </p>
+        </section>
       </main>
 
       <SettingsPanel open={settingsOpen} onClose={() => setSettingsOpen(false)} />
