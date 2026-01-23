@@ -156,6 +156,11 @@ export default function Dashboard({ user, onLogout }: Props) {
     return first
   }, [user.email])
 
+  const username = useMemo(() => {
+    const raw = user.email?.split('@')?.[0]?.trim()
+    return raw || 'User'
+  }, [user.email])
+
   useEffect(() => {
     function onPointerDown(e: MouseEvent) {
       if (!profileMenuOpen) return
@@ -187,7 +192,7 @@ export default function Dashboard({ user, onLogout }: Props) {
     <div className="dashboardPage">
       <header className="topbar">
         <div className="topbarLeft">
-          <h1 className="topbarTitle">Welcome, Dashboard!</h1>
+          <h1 className="topbarTitle">Welcome, {username}!</h1>
         </div>
 
         <div className="topbarRight">
@@ -273,9 +278,6 @@ export default function Dashboard({ user, onLogout }: Props) {
           <div className="welcomeActions">
             <button className="button secondary" type="button" onClick={() => setProfileModalOpen(true)}>
               View Profile
-            </button>
-            <button className="button" type="button" onClick={() => setSettingsOpen(true)}>
-              Open Settings
             </button>
           </div>
         </div>
