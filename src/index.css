@@ -20,8 +20,15 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: radial-gradient(1200px 600px at 20% 10%, #eef2ff 0%, transparent 60%),
-    radial-gradient(900px 600px at 80% 30%, #ecfeff 0%, transparent 55%), #f6f7fb;
+  /* Global wallpaper */
+  background:
+    /* subtle dark overlay so login/dashboard cards stay readable */
+    linear-gradient(180deg, rgba(2, 6, 23, 0.45) 0%, rgba(2, 6, 23, 0.65) 100%),
+    url('/wallpapers/ny-usa.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 code {
@@ -191,7 +198,7 @@ code {
 
 /* Dashboard landing page */
 .dashboardPage {
-  --dashboard-bg-image: url('/nyc-night.svg');
+  --dashboard-bg-image: url('/wallpapers/ny-usa.webp');
 
   min-height: 100vh;
   display: grid;
