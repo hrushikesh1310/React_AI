@@ -54,7 +54,7 @@ export default function LoginForm({ onLogin }: Props) {
       <div className="card">
         <header className="cardHeader">
           <h1 className="title">Sign in</h1>
-          <p className="subtitle">Simple client-side demo login (no backend)</p>
+          <p className="subtitle">Sign in via API (credentials validated server-side)</p>
         </header>
 
         <form className="form" onSubmit={handleSubmit}>

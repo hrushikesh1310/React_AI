@@ -17,6 +17,9 @@ dist-ssr
 .env.*
 !.env.example
 
+# Allow committing env template/examples
+!.env.local.example
+
 # Coverage
 coverage
 
